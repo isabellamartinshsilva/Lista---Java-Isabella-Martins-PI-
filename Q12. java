@@ -1,0 +1,58 @@
+import java.util.Scanner;
+
+public class Q12 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int l = sc.nextInt();
+        int c = sc.nextInt();
+
+        int[][] matriz = new int[l][c];
+
+        for (int i = 0; i < l; i++) {
+            for (int j = 0; j < c; j++) {
+                matriz[i][j] = sc.nextInt();
+            }
+        }
+
+        int r = sc.nextInt();
+        int s = sc.nextInt();
+
+        int total = l * c;
+
+        if (r * s != total) {
+            System.out.println("Reorganizacao impossivel");
+        } else {
+            int[][] nova = new int[r][s];
+
+            preencherNova(matriz, nova, l, c, r, s);
+
+            System.out.println("Matriz reorganizada:");
+            for (int i = 0; i < r; i++) {
+                for (int j = 0; j < s; j++) {
+                    System.out.print(nova[i][j] + " ");
+                }
+                System.out.println();
+            }
+        }
+
+        sc.close();
+    }
+
+    public static void preencherNova(int[][] matriz, int[][] nova, int l, int c, int r, int s) {
+        int k = 0;
+
+        for (int i = 0; i < l; i++) {
+            for (int j = 0; j < c; j++) {
+
+                int linhaNova = k / s;
+                int colunaNova = k % s;
+
+                nova[linhaNova][colunaNova] = matriz[i][j];
+
+                k++;
+            }
+        }
+    }
+}
